@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #0d1117;
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(240, 168, 60, 0.08), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(79, 157, 222, 0.06), transparent 45%),
+    linear-gradient(rgba(240, 168, 60, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 168, 60, 0.045) 1px, transparent 1px);
+  background-size: auto, auto, 40px 40px, 40px 40px;
+}
+
+::selection {
+  background: rgba(240, 168, 60, 0.35);
+}
+
+* {
+  scrollbar-color: #f0a83c33 #12181f;
+  scrollbar-width: thin;
+}
+
+@layer utilities {
+  .clip-corner {
+    clip-path: polygon(
+      14px 0,
+      100% 0,
+      100% calc(100% - 14px),
+      calc(100% - 14px) 100%,
+      0 100%,
+      0 14px
+    );
+  }
+
+  .clip-corner-sm {
+    clip-path: polygon(
+      8px 0,
+      100% 0,
+      100% calc(100% - 8px),
+      calc(100% - 8px) 100%,
+      0 100%,
+      0 8px
+    );
+  }
+
+  .text-shadow-glow {
+    text-shadow: 0 0 12px rgba(240, 168, 60, 0.5);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0px rgba(240, 168, 60, 0.0);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(240, 168, 60, 0.45);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.2s ease-in-out infinite;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.3s ease-out both;
+}

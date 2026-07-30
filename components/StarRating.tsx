@@ -32,20 +32,38 @@ export default function StarRating({
       )}
       <div className={`flex gap-0.5 ${sizeMap[size]}`}>
         {stars.map((s) => {
-          const filled = s <= value;
+          const fill = Math.max(0, Math.min(1, value - (s - 1)));
           return (
-            <button
+            <span
               key={s}
-              type="button"
-              disabled={!editable}
-              onClick={() => onChange?.(s)}
-              className={`leading-none ${
-                editable ? "cursor-pointer hover:scale-110 transition-transform" : "cursor-default"
-              } ${filled ? "text-cs-orange" : "text-cs-border"}`}
-              aria-label={`${s} star${s > 1 ? "s" : ""}`}
+              className={`relative inline-block leading-none text-cs-border ${
+                editable ? "transition-transform hover:scale-110" : ""
+              }`}
             >
               ★
-            </button>
+              <span
+                className="absolute inset-y-0 left-0 overflow-hidden text-cs-orange"
+                style={{ width: `${fill * 100}%` }}
+              >
+                ★
+              </span>
+              {editable && (
+                <span className="absolute inset-0 flex">
+                  <button
+                    type="button"
+                    onClick={() => onChange?.(s - 0.5)}
+                    className="h-full w-1/2 cursor-pointer"
+                    aria-label={`${s - 0.5} stars`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => onChange?.(s)}
+                    className="h-full w-1/2 cursor-pointer"
+                    aria-label={`${s} stars`}
+                  />
+                </span>
+              )}
+            </span>
           );
         })}
       </div>

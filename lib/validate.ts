@@ -13,8 +13,8 @@ export class ValidationError extends Error {}
 
 function num(v: unknown, field: string): number {
   const n = Number(v);
-  if (!Number.isInteger(n) || n < 1 || n > 5) {
-    throw new ValidationError(`${field} must be a whole number between 1 and 5.`);
+  if (!Number.isInteger(n * 2) || n < 1 || n > 5) {
+    throw new ValidationError(`${field} must be a number between 1 and 5, in half-star increments.`);
   }
   return n;
 }

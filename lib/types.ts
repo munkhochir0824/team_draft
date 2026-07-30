@@ -7,11 +7,11 @@ export type Role =
   | "Rifler";
 
 export interface Abilities {
-  aim: number; // 1-5
-  gameSense: number; // 1-5
-  positioning: number; // 1-5
-  utility: number; // 1-5
-  clutch: number; // 1-5
+  aim: number; // 1-5, in 0.5 increments
+  gameSense: number; // 1-5, in 0.5 increments
+  positioning: number; // 1-5, in 0.5 increments
+  utility: number; // 1-5, in 0.5 increments
+  clutch: number; // 1-5, in 0.5 increments
 }
 
 export interface Player {

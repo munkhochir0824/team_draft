@@ -155,6 +155,7 @@ export default function DraftBoard() {
               team={team}
               players={data.players.filter((p) => p.teamId === team.id)}
               onTheClock={onClockTeamId === team.id}
+              showAverage={draft.status === "complete"}
             />
           ))}
         </div>

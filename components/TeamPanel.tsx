@@ -6,12 +6,15 @@ interface TeamPanelProps {
   team: Team;
   players: Player[];
   onTheClock: boolean;
+  showAverage?: boolean;
 }
 
-export default function TeamPanel({ team, players, onTheClock }: TeamPanelProps) {
+export default function TeamPanel({ team, players, onTheClock, showAverage = false }: TeamPanelProps) {
   const color = teamColor(team.id);
   const roster = [...players].sort((a, b) => (a.pickNumber ?? 0) - (b.pickNumber ?? 0));
   const emptySlots = Math.max(0, ROSTER_SIZE - roster.length);
+  const avgRating =
+    roster.length > 0 ? roster.reduce((sum, p) => sum + overallRating(p), 0) / roster.length : 0;
 
   return (
     <div
@@ -26,6 +29,11 @@ export default function TeamPanel({ team, players, onTheClock }: TeamPanelProps)
         {onTheClock && (
           <span className={`text-[10px] font-bold uppercase tracking-widest ${color.text} animate-pulse`}>
             On the clock
+          </span>
+        )}
+        {showAverage && (
+          <span className="font-display text-xs font-bold text-cs-orange shrink-0">
+            {avgRating.toFixed(1)}
           </span>
         )}
       </div>
